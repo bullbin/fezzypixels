@@ -2,6 +2,7 @@ import numpy as np
 from typing import Tuple, Optional
 from dither.color import srgb_to_luminance, srgb_to_lin_srgb, lin_srgb_to_oklab
 from dither.pattern.bayer import get_bayer_map_8, get_bayer_map_2, get_bayer_map_4
+from dither.palette import get_most_similar_shade_index_lab
 from dither.helper import load_precompute_bn_l_image
 from os.path import dirname, join
 from enum import Enum, auto
@@ -21,29 +22,6 @@ class ThresholdMode(Enum):
 # Blue noise texture. CC0, credit - https://momentsingraphics.de/BlueNoise.html
 PATH_HDR_TEMPLATE : str = join(dirname(__file__), "HDR_L_0.png")
 CACHE_LIN_BLUE_NOISE : Optional[np.ndarray] = None
-
-def get_most_similar_shade_index(image_lab : np.ndarray, palette_lab : np.ndarray, y : int, x : int) -> int:
-    """Get the index of the color in the palette closest to the reference pixel.
-
-    This uses Delta E 1976 for the metric which is fast to compute but has weaknesses depending
-    on the colorspace. It is strongly suggested to use an upgraded LAB space (like Oklab) to avoid
-    issues with darker colors, saturated colors, neutrals and blues.
-
-    Args:
-        image_lab (np.ndarray): Image in LAB space. Must be in same space as palette.
-        palette_lab (np.ndarray): Palette in LAB space. Must be in same space as image.
-        y (int): Reference y.
-        x (int): Reference x.
-
-    Returns:
-        int: Index of most similar palette color.
-    """
-    pixel = image_lab[y,x]
-    delta_l = (palette_lab[..., 0] - pixel[0]) ** 2
-    delta_a = (palette_lab[..., 1] - pixel[1]) ** 2
-    delta_b = (palette_lab[..., 2] - pixel[2]) ** 2
-    delta_squared = delta_l + delta_a + delta_b
-    return np.argmin(delta_squared)
 
 def pattern_dither_srgb(image_srgb : np.ndarray, palette_srgb : np.ndarray, n : int = 32, q : float = 0.05, threshold_mode : ThresholdMode = ThresholdMode.BAYER_4) -> np.ndarray:
     """Apply Thomas Knoll's 'Pattern Dithering' algorithm to quantize an image down to an arbitrary palette.
@@ -107,7 +85,7 @@ def pattern_dither_srgb(image_srgb : np.ndarray, palette_srgb : np.ndarray, n : 
 
             for y in range(output_candidate.shape[0]):
                 for x in range(output_candidate.shape[1]):
-                    shade = get_most_similar_shade_index(draft_lab, palette_lab, y, x)
+                    shade = get_most_similar_shade_index_lab(palette_lab, draft_lab[y,x])
                     output_candidate[y,x] = shade
                     output_color[y,x] = palette_lin[shade]
             

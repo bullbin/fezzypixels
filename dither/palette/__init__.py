@@ -1,1 +1,2 @@
 from .k_means_minibatch_lab import k_means_get_srgb_palette
+from .color_compare import ColorSimilarityMetric, get_most_similar_shade_index_lab, get_most_similar_shade_index_srgb_binary, get_most_similar_shade_index_srgb_blend
