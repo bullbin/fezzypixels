@@ -2,11 +2,11 @@ import numpy as np
 from enum import Enum, auto
 from typing import Tuple
 
-ATKINSON_OFFSETS : np.ndarray = np.array([[0,1], [0,2],[1,-1],[1,0],[1,1],[2,0]])
-ATKINSON_WEIGHTS : np.ndarray = np.array([1,1,1,1,1,1]) /8
+ATKINSON_OFFSETS : np.ndarray = np.array([[0,1],[0,2],[1,-1],[1,0],[1,1],[2,0]])
+ATKINSON_WEIGHTS : np.ndarray = np.array([1,1,1,1,1,1]) / 8
 
 FLOYD_STEINBERG_OFFSETS : np.ndarray = np.array([[0,1],[1,-1],[1,0],[1,1]])
-FLOYD_STEINBERG_WEIGHTS : np.ndarray = np.array([7,3,5,1]) /16
+FLOYD_STEINBERG_WEIGHTS : np.ndarray = np.array([7,3,5,1]) / 16
 
 JJN_MMA_OFFSETS : np.ndarray = np.array([[0,1],[0,2],[1,-2],[1,-1],[1,0],[1,1],[1,2],[2,-2],[2,-1],[2,0],[2,1],[2,2]])
 JJN_MMA_WEIGHTS : np.ndarray = np.array([7,5,3,5,7,5,3,1,3,5,3,1]) / 48
