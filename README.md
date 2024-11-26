@@ -29,11 +29,11 @@ The library is still a work-in-progress so subject to change. A submodule branch
 import cv2
 import numpy as np
 
-from dither.palette.k_means_minibatch_lab import k_means_get_srgb_palette
-from dither.palette.preprocess import add_flat_regions_to_k_means_input
-from dither.pattern.pattern_dither import ThresholdMode, pattern_dither_srgb
-from dither.preprocess.ordered_pattern_dither_srgb import pattern_dither_to_srgb555
-from dither.shift import rgb888_to_norm
+from fezzypixels.palette.k_means_minibatch_lab import k_means_get_srgb_palette
+from fezzypixels.palette.preprocess import add_flat_regions_to_k_means_input
+from fezzypixels.pattern.pattern_dither import ThresholdMode, pattern_dither_srgb
+from fezzypixels.preprocess.ordered_pattern_dither_srgb import pattern_dither_to_srgb555
+from fezzypixels.shift import rgb888_to_norm
 
 PATH_INPUT_IMAGE : str = ...
 PATH_OUTPUT_IMAGE : str = ...

@@ -1,4 +1,4 @@
-from dither.color import lin_srgb_to_oklab, srgb_to_lin_srgb
+from fezzypixels.color import lin_srgb_to_oklab, srgb_to_lin_srgb
 
 from typing import Tuple
 

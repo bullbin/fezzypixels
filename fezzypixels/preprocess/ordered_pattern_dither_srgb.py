@@ -1,9 +1,9 @@
 import numpy as np
-from dither.shift import rgb888_to_rgb555_scale, rgb555_to_norm
-from dither.color import srgb_to_luminance, srgb_to_lin_srgb, lin_srgb_to_srgb
+from fezzypixels.shift import rgb888_to_rgb555_scale, rgb555_to_norm
+from fezzypixels.color import srgb_to_luminance, srgb_to_lin_srgb, lin_srgb_to_srgb
 from typing import Optional
 from os.path import join, dirname
-from dither.helper import load_precompute_bn_l_image
+from fezzypixels.helper import load_precompute_bn_l_image
 
 # Blue noise texture. CC0, credit - https://momentsingraphics.de/BlueNoise.html
 PATH_HDR_TEMPLATE : str = join(dirname(__file__), "HDR_L_1.png")

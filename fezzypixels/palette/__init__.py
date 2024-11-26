@@ -1,3 +1,5 @@
 from .k_means_minibatch_lab import k_means_get_srgb_palette
+from .k_means_refine import refine_palette
+from .median_cut import median_cut_srgb_palette
 from .color_compare import ColorSimilarityMetric, get_most_similar_shade_index_lab, get_most_similar_shade_index_srgb_binary, get_most_similar_shade_index_srgb_blend
-from .preprocess import add_flat_regions_to_k_means_input
+from .preprocess import flatten_with_flat_roi_enhancement

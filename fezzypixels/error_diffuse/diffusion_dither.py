@@ -1,5 +1,5 @@
 import numpy as np
-from dither.color import srgb_to_lin_srgb, lin_srgb_to_oklab
+from fezzypixels.color import srgb_to_lin_srgb, lin_srgb_to_oklab
 from .diffusion_weights import get_dither_weighting, DitheringWeightingMode
 from .lab_err_diff import dither_to_palette
 from typing import Optional
@@ -20,7 +20,7 @@ def error_diffusion_dither_srgb(image_srgb_norm : np.ndarray, palette_srgb : np.
         serp_skip (bool, optional): Skip diffusing on serpentine lines. May produce more pleasing images. Defaults to False.
 
     Returns:
-        np.ndarray: Quantized image in normalized sRGB color.
+        np.ndarray: Image as indices into palette.
     """
 
     assert 0 <= error_weight <= 1
@@ -38,7 +38,5 @@ def error_diffusion_dither_srgb(image_srgb_norm : np.ndarray, palette_srgb : np.
     image_linear = srgb_to_lin_srgb(image_srgb_norm)
     
     offsets, weights = get_dither_weighting(diffuse_mode)
-    output = dither_to_palette(image_linear.astype(np.float32), palette_linear.astype(np.float32), lin_srgb_to_oklab(palette_linear)[0].astype(np.float32),
-                               skip_mask, offsets.astype(np.uint8), weights.astype(np.float32), serpentine, serp_skip, error_weight)
-    
-    return palette_srgb[output].astype(np.float32)
+    return dither_to_palette(image_linear.astype(np.float32), palette_linear.astype(np.float32), lin_srgb_to_oklab(palette_linear)[0].astype(np.float32),
+                             skip_mask, offsets.astype(np.uint8), weights.astype(np.float32), serpentine, serp_skip, error_weight)

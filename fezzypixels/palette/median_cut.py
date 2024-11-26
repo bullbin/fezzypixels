@@ -1,8 +1,8 @@
 from __future__ import annotations
 import numpy as np
 from typing import List
-from dither.color import lin_srgb_to_srgb, oklab_to_lin_srgb, srgb_to_lin_srgb, lin_srgb_to_oklab
-from dither.shift import rgb555_to_norm, rgb888_to_rgb555_scale
+from fezzypixels.color import lin_srgb_to_srgb, oklab_to_lin_srgb, srgb_to_lin_srgb, lin_srgb_to_oklab
+from fezzypixels.shift import rgb555_to_norm, rgb888_to_rgb555_scale
 
 class Cube3d():
     def __init__(self, pixels : np.ndarray):
@@ -53,7 +53,7 @@ def median_cut_srgb_palette(image_srgb_norm : np.ndarray, count_colors : int = 1
 
     Args:
         image_srgb_norm (np.ndarray): Normalized sRGB image.
-        count_colors (int, optional): Maximum amount of colors to generate. Must be greater than 0 and less than 200. Defaults to 199.
+        count_colors (int, optional): Maximum amount of colors to generate. Must be greater than 0 and less than 256. Defaults to 199.
         max_iters_mult (float, optional): Maximum iterations across the palette. Higher is slower but produces more colors. Will terminate early once palette fills. Must be greater than 1. Defaults to 5.
         mse_split (bool, optional): If True, uses within-split error instead of box size to choose which color volume to split. May be slower but improves quality especially at lower color counts. Recommended. Defaults to True.
 
@@ -61,7 +61,7 @@ def median_cut_srgb_palette(image_srgb_norm : np.ndarray, count_colors : int = 1
         np.ndarray: sRGB555 palette in shape (count, 3). Colors may be less than count_colors.
     """
     assert max_iters_mult > 1
-    assert count_colors > 0
+    assert 0 < count_colors < 256
 
     max_iters = round(count_colors * max_iters_mult)
     

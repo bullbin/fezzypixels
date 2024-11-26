@@ -1,9 +1,9 @@
 import numpy as np
 from typing import Tuple, Optional
-from dither.color import srgb_to_luminance, srgb_to_lin_srgb, lin_srgb_to_oklab
-from dither.pattern.bayer import get_bayer_map_8, get_bayer_map_2, get_bayer_map_4
-from dither.palette import get_most_similar_shade_index_lab
-from dither.helper import load_precompute_bn_l_image
+from fezzypixels.color import srgb_to_luminance, srgb_to_lin_srgb, lin_srgb_to_oklab
+from fezzypixels.pattern.bayer import get_bayer_map_8, get_bayer_map_2, get_bayer_map_4
+from fezzypixels.palette import get_most_similar_shade_index_lab
+from fezzypixels.helper import load_precompute_bn_l_image
 from os.path import dirname, join
 from enum import Enum, auto
 
@@ -49,7 +49,7 @@ def pattern_dither_srgb(image_srgb : np.ndarray, palette_srgb : np.ndarray, n : 
         threshold_mode (ThresholdMode, optional): Threshold mode for final dithering step. Changes texture of output. Defaults to ThresholdMode.BAYER_4.
 
     Returns:
-        np.ndarray: Image in normalized and palettized sRGB color.
+        np.ndarray: Image as indices into palette.
     """
     
     # Use some globals so we only have to load the blue noise texture once (it's okay...)
@@ -132,5 +132,4 @@ def pattern_dither_srgb(image_srgb : np.ndarray, palette_srgb : np.ndarray, n : 
 
     # Vectorize candidate and output
     candidate = np.clip(np.floor(shift * n).astype(np.uint32), 0, n - 1)
-    output = np.copy(palette_srgb[candidate_array[idx_y,idx_x,candidate]])
-    return output
+    return candidate_array[idx_y,idx_x,candidate]

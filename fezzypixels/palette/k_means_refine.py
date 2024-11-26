@@ -1,6 +1,6 @@
 import numpy as np
-from dither.color import srgb_to_lin_srgb, lin_srgb_to_oklab, oklab_to_lin_srgb, lin_srgb_to_srgb
-from dither.shift import rgb888_to_rgb555_scale, rgb555_to_norm
+from fezzypixels.color import srgb_to_lin_srgb, lin_srgb_to_oklab, oklab_to_lin_srgb, lin_srgb_to_srgb
+from fezzypixels.shift import rgb888_to_rgb555_scale, rgb555_to_norm
 from .k_means import do_k_steps_2d
 
 def refine_palette(image_srgb : np.ndarray, palette_srgb : np.ndarray, iterations : int = 3) -> np.ndarray:

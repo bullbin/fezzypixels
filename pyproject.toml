@@ -1,0 +1,35 @@
+[build-system]
+requires = ["cython", "numpy", "setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+dynamic = ["dependencies"]
+name = "fezzypixels"
+version = "0.0.1"
+authors = [{name="bullbin"}]
+description = "High-quality RGB555 dithering and paletting library"
+readme = {file = "README.md", content-type = "text/markdown"}
+license = {file = "LICENSE"}
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Artistic Software",
+    "Topic :: Multimedia :: Graphics",
+    "Topic :: Multimedia :: Graphics :: Graphics Conversion"
+]
+
+[project.urls]
+Homepage = "https://github.com/bullbin/fezzypixels"
+Repository = "https://github.com/bullbin/fezzypixels.git"
+Issues = "https://github.com/bullbin/fezzypixels/issues"
+
+[tool.setuptools.packages]
+find = {}
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
+[tool.setuptools.package-data]
+"*" = ["*.png"]
