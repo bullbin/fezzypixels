@@ -8,7 +8,7 @@ def k_means_get_srgb_palette(image_srgb_norm : np.ndarray, count_colors : int = 
     """Get an sRGB555 palette using a k-means solver.
 
     Args:
-        image_srgb_norm (np.ndarray): Normalized sRGB image.
+        image_srgb_norm (np.ndarray): Normalized sRGB image. Minibatching is used so downsampling is not required but may be faster.
         count_colors (int, optional): Maximum amount of colors to generate. Must be greater than 0 and less than 200. Defaults to 199.
         seed (int, optional): Seed for random number generator. Defaults to 1.
         k_means_batch_size (int, optional): Amount of pixels considered in each k-means step. Larger may improve quality but will be slower. Must be greater than 0. Defaults to 4096.

@@ -166,3 +166,4 @@ nopush_*
 *.png
 dither/pattern/fast_candidates.c
 dither/error_diffuse/lab_err_diff.c
+dither/palette/k_means.c
