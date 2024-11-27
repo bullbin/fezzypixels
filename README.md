@@ -2,7 +2,7 @@
 fezzypixels is a library for producing high-quality quantized (and paletted) images in sRGB555.
 
 ## why use fezzypixels?
-fezzypixels was written from the ground up to make generating smooth RGB555 images easy. fezzypixel includes...
+fezzypixels was written from the ground up to make generating smooth RGB555 images easy. fezzypixels includes...
 
  - Color space optimized rendering with internal gamma-correction and perceptual matching as needed
  - Quality-first approaches to maximise palette quality even on complex gradations
@@ -29,9 +29,9 @@ fezzypixels works on images in the form of floating-point numpy arrays with shap
 input_image_srgb = cv2.imread(...)
 input_image_srgb = cv2.cvtColor(input_image_srgb, cv2.COLOR_BGR2RGB)
 ```
-All images must be normalized to [0,1] regardless of input bit depth. For 8-bit images, fezzypixel contains convenience methods for this:
+All images must be normalized to [0,1] regardless of input bit depth. For 8-bit images, fezzypixels contains convenience methods for this:
 ```
-from dither.shift import rgb888_to_norm
+from fezzypixels.shift import rgb888_to_norm
 input_image_norm = rgb888_to_norm(input_image_srgb)
 ```
 
