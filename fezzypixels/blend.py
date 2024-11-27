@@ -32,7 +32,7 @@ def get_flatness_and_edges(image_srgb : np.ndarray, window_size : int = 3, v_cli
         Tuple[np.ndarray, np.ndarray]: (Flatness map, Edge map) where smaller values are less textured.
     """
 
-    brightness = lin_srgb_to_oklab(srgb_to_lin_srgb(image_srgb))[...,0]
+    brightness = lin_srgb_to_oklab(srgb_to_lin_srgb(image_srgb))[...,0].astype(np.float32)
 
     # Calculate local variance
     variance_map = get_2d_variance(brightness, window_size)
