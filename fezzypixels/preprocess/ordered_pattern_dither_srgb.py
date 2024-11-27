@@ -9,7 +9,7 @@ from fezzypixels.helper import load_precompute_bn_l_image
 PATH_HDR_TEMPLATE : str = join(dirname(__file__), "HDR_L_1.png")
 CACHE_LIN_BLUE_NOISE : Optional[np.ndarray] = None
 
-def pattern_dither_to_srgb555(image_srgb_norm : np.ndarray, n : int = 32, q : float = 0.5) -> np.ndarray:
+def pattern_dither_to_srgb555(image_srgb_norm : np.ndarray, n : int = 4, q : float = 0.8) -> np.ndarray:
     """Apply Thomas Knoll's 'Pattern Dithering' algorithm to quantize an image down to sRGB555.
 
     This is a modification of dither.pattern.pattern_dither_srgb and works entirely in linearized
@@ -21,8 +21,8 @@ def pattern_dither_to_srgb555(image_srgb_norm : np.ndarray, n : int = 32, q : fl
 
     Args:
         image_srgb_norm (np.ndarray): Image in normalized sRGB color.
-        n (int, optional): Number of candidates to find for each pixel. Larger costs more but increases depth of grain. Defaults to 32.
-        q (float, optional): Threshold mode for final dithering step. Changes texture of output. Defaults to 0.5.
+        n (int, optional): Number of candidates to find for each pixel. Larger costs more but increases depth of grain. Defaults to 4.
+        q (float, optional): Threshold mode for final dithering step. Changes texture of output. Defaults to 0.8.
 
     Raises:
         FileNotFoundError: Raised if noise pattern image could not be loaded for any reason.
