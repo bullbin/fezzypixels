@@ -132,4 +132,6 @@ def pattern_dither_srgb(image_srgb : np.ndarray, palette_srgb : np.ndarray, n : 
 
     # Vectorize candidate and output
     candidate = np.clip(np.floor(shift * n).astype(np.uint32), 0, n - 1)
-    return candidate_array[idx_y,idx_x,candidate]
+
+    # Remap back to original palette indexing to fixup output
+    return idx_sorted[candidate_array[idx_y,idx_x,candidate]]

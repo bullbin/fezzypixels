@@ -39,4 +39,4 @@ def error_diffusion_dither_srgb(image_srgb_norm : np.ndarray, palette_srgb : np.
     
     offsets, weights = get_dither_weighting(diffuse_mode)
     return dither_to_palette(image_linear.astype(np.float32), palette_linear.astype(np.float32), lin_srgb_to_oklab(palette_linear)[0].astype(np.float32),
-                             skip_mask, offsets.astype(np.uint8), weights.astype(np.float32), serpentine, serp_skip, error_weight)
+                             skip_mask, offsets.astype(np.int8), weights.astype(np.float32), serpentine, serp_skip, error_weight)

@@ -12,9 +12,11 @@ np.import_array()
 
 DTYPE_FLOAT = np.float32
 DTYPE_UINT = np.uint8
+DTYPE_OFFSET = np.int8
 
 ctypedef np.float32_t DTYPE_FLOAT_t
 ctypedef np.uint8_t DTYPE_UINT_t
+ctypedef np.int8_t DTYPE_OFFSET_t
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
@@ -61,7 +63,7 @@ cdef void dither_internal(DTYPE_UINT_t[:,:] out_pal_idx,
 						  DTYPE_FLOAT_t[:,:] pal_lin_rgb,
 						  DTYPE_FLOAT_t[:,:] pal_lab,
 						  DTYPE_UINT_t[:,:] mask,
-						  DTYPE_UINT_t[:,:] offsets,
+						  DTYPE_OFFSET_t[:,:] offsets,
 						  DTYPE_FLOAT_t[:] err_weights,
 						  bint serpentine,
 						  bint skip_serp,
@@ -110,7 +112,7 @@ cpdef np.ndarray[DTYPE_UINT_t, ndim=2] dither_to_palette(np.ndarray[DTYPE_FLOAT_
 													   np.ndarray[DTYPE_FLOAT_t, ndim=2] palette_lin,
 													   np.ndarray[DTYPE_FLOAT_t, ndim=2] palette_lab,
 													   np.ndarray[DTYPE_UINT_t, ndim=2] mask,
-													   np.ndarray[DTYPE_UINT_t, ndim=2] offsets,
+													   np.ndarray[DTYPE_OFFSET_t, ndim=2] offsets,
 													   np.ndarray[DTYPE_FLOAT_t, ndim=1] err_weights,
 													   bint serpentine,
 													   bint skip_serp,

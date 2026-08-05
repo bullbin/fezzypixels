@@ -13,7 +13,7 @@ fezzypixels was written from the ground up to make generating smooth RGB555 imag
 ## how do I install this?
 
 ### (easiest) PyPI via pip
-fezzypixels and (limited) pre-build wheels are available on PyPI, so the easiest way to get the latest release candidate is using `pip install fezzypixels`
+fezzypixels and (limited) pre-built wheels are available on PyPI, so the easiest way to get the latest release candidate is using `pip install fezzypixels`
 
 ### Build from source
 fezzypixels uses a standard Python build system and has few requirements so should be fairly easy to build. You'll need a functional C compiler and Python 3 - development used Python 3.12 but other versions may work. To install the project, follow these steps:
